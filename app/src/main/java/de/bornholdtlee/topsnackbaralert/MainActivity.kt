@@ -11,13 +11,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         findViewById<MaterialButton>(R.id.positiveBtn).setOnClickListener {
-            TopSnackbar.showPositiveMessage(activity = this, message = "This is a positive Alert")
+            TopSnackbar.show(
+                activity = this,
+                message = "This is a positive Alert",
+                type = TopSnackbar.Type.Positive
+            )
         }
         findViewById<MaterialButton>(R.id.neutralBtn).setOnClickListener {
-            TopSnackbar.showNeutralMessage(activity = this, message = "This is a neutral Alert")
+            TopSnackbar.show(
+                activity = this,
+                message = "This is a neutral Alert",
+                type = TopSnackbar.Type.Neutral
+            )
         }
         findViewById<MaterialButton>(R.id.negativeBtn).setOnClickListener {
-            TopSnackbar.showNegativeMessage(activity = this, message = "This is a negative Alert")
+            TopSnackbar.show(
+                activity = this,
+                message = "This is a negative Alert",
+                type = TopSnackbar.Type.Negative
+            )
         }
+
+
     }
 }
