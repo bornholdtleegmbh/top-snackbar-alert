@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Night mode adapted colors -->
+    <color name="background">#181719</color>
+    <color name="foreground">#302E32</color>
+
+    <color name="primary">#FFFFFF</color>
+    <color name="primary_with_opacity_40_alpha">#66FFFFFF</color>
+    <color name="primary_with_opacity_40">#828485</color>
+    <color name="primary_with_opacity_20_alpha">#33FFFFFF</color>
+
+    <color name="secondary">#8A8A8A</color>
+    <color name="secondary_with_opacity_40">#668A8A8A</color>
+    <color name="secondary_with_opacity_10">#198A8A8A</color>
+    <color name="secondary_with_opacity_04">#0A8A8A8A</color>
+
+    <color name="tertiary">#4F4C51</color>
+</resources>
