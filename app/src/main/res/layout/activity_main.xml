@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/two_grid_unit"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/positiveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Positive Alert"
+        app:layout_constraintBottom_toTopOf="@id/neutralBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/neutralBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Neutral Alert"
+        app:layout_constraintBottom_toTopOf="@id/negativeBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/positiveBtn" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/negativeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Negative Alert"
+        app:layout_constraintBottom_toTopOf="@id/actionMessageTIL"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/neutralBtn" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/actionMessageCB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/actionMessageTIL"
+        app:layout_constraintEnd_toStartOf="@id/actionMessageTIL"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/actionMessageTIL" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/actionMessageTIL"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Action message"
+        app:layout_constraintBottom_toTopOf="@id/actionClickedTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/actionMessageCB"
+        app:layout_constraintTop_toBottomOf="@id/negativeBtn">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/actionMessageET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/actionClickedCB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/actionClickedTV"
+        app:layout_constraintEnd_toStartOf="@id/actionClickedTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/actionClickedTV" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/actionClickedTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/two_grid_unit"
+        android:text="Toast after action clicked"
+        app:layout_constraintBottom_toTopOf="@id/durationSlider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/actionMessageCB"
+        app:layout_constraintTop_toBottomOf="@id/actionMessageTIL" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/durationSlider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/two_grid_unit"
+        android:stepSize="1"
+        android:value="2000"
+        android:valueFrom="0"
+        android:valueTo="10000"
+        app:layout_constraintBottom_toTopOf="@id/topMarginPaddingTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/durationTV"
+        app:layout_constraintTop_toBottomOf="@id/actionClickedTV" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/durationTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Duration (ms)"
+        app:layout_constraintBottom_toBottomOf="@id/durationSlider"
+        app:layout_constraintEnd_toStartOf="@id/durationSlider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/durationSlider" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/topMarginPaddingCB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/topMarginPaddingTV"
+        app:layout_constraintEnd_toStartOf="@id/topMarginPaddingTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/topMarginPaddingTV" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/topMarginPaddingTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/two_grid_unit"
+        android:text="Apply Status Bar Padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/actionMessageCB"
+        app:layout_constraintTop_toBottomOf="@id/durationSlider" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
