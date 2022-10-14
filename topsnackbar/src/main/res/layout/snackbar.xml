@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nine_grid_unit"
-    android:layout_marginTop="@dimen/one_grid_unit"
-    android:layout_marginBottom="@dimen/one_grid_unit">
+    android:layout_marginVertical="@dimen/one_grid_unit">
 
     <View
-        android:id="@+id/snackbar_background"
+        android:id="@+id/tsbBackground"
         android:layout_width="match_parent"
         android:layout_height="@dimen/nine_grid_unit"
-        android:background="@drawable/background_rounded_corners" />
+        android:background="@drawable/background_rounded_corners"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/seven_grid_unit"
+    <TextView
+        android:id="@+id/tsbMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/three_grid_unit"
-        android:layout_marginTop="@dimen/one_grid_unit"
+        android:gravity="center"
+        android:maxLines="3"
+        android:textAlignment="center"
+        android:textColor="@color/textColor"
+        app:autoSizeMaxTextSize="@dimen/text_large"
+        app:autoSizeMinTextSize="@dimen/one_grid_unit"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tsbAction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="FEHLER!!1!1  #*@!$?" />
+
+    <TextView
+        android:id="@+id/tsbAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/one_grid_unit"
         android:layout_marginEnd="@dimen/three_grid_unit"
-        android:layout_marginBottom="@dimen/one_grid_unit"
-        android:orientation="horizontal">
+        android:padding="@dimen/one_grid_unit"
+        android:text="@android:string/ok"
+        android:textColor="@color/textColor"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tsbMessage"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/snackbar_message"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_toStartOf="@id/snackbar_action_bkk"
-            android:gravity="center"
-            android:maxLines="3"
-            android:textAlignment="center"
-            app:autoSizeMaxTextSize="@dimen/text_groß_text_size"
-            app:autoSizeMinTextSize="@dimen/one_grid_unit"
-            app:autoSizeTextType="uniform"
-            tools:text="FEHLER!!1!1  #*@!$?" />
-
-        <TextView
-            android:id="@+id/snackbar_action_bkk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/one_grid_unit"
-            android:padding="@dimen/one_grid_unit"
-            android:text="@android:string/ok"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-    </RelativeLayout>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

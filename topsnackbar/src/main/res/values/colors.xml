@@ -1,48 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Basic Colors -->
     <color name="background">#F2F2F2</color>
-    <color name="foreground">#FFFFFF</color>
 
-    <color name="black_ten">#E6000000</color>
-    <color name="white">#FFFFFF</color>
-
-    <color name="primary">#181719</color>
-    <color name="primary_with_opacity_40_alpha">#66181719</color>
-    <color name="primary_with_opacity_40">#66626A</color>
-    <color name="primary_with_opacity_20_alpha">#33181719</color>
-
-    <color name="secondary">#959595</color>
-    <color name="secondary_with_opacity_40">#66959595</color>
-    <color name="secondary_with_opacity_10">#19959595</color>
-    <color name="secondary_with_opacity_04">#0A959595</color>
-
-    <color name="tertiary">#E5E5E5</color>
+    <color name="textColor">#000000</color>
 
     <color name="actionRed">#ED4365</color>
     <color name="actionGreen">#37E48E</color>
-
-    <color name="bkk100Default">#FFD400</color>
-    <color name="bkk60Default">#FFE566</color>
-    <color name="bkk30Default">#FFF2B2</color>
-
-    <color name="assistantDefault">#FFF2B2</color>
-
-    <color name="factor_light_yellow">#FFF2AC</color>
-    <color name="factor_light_yellow_two">#FFFADC</color>
-    <color name="factor_yellow_one">#FFD600</color>
-    <color name="factor_yellow_two">#FFE347</color>
-    <color name="factor_red">#E0484F</color>
-    <color name="factor_black">#1D1D1B</color>
-    <color name="factor_grey">#C6C6C6</color>
-    <color name="factor_grey_two">#E6E6E6</color>
-    <color name="factor_blue">#48A8FF</color>
-    <color name="factor_green">#99C98A</color>
-    <color name="factor_brown">#D69966</color>
-    <color name="factor_white">#FFFFFF</color>
-
-    <color name="zpp_bg_color">#F2F2F2</color>
-
-    <color name="chat_day_header_text">#8A8A8A</color>
-    <color name="chat_alert_orange">#FFB179</color>
 </resources>

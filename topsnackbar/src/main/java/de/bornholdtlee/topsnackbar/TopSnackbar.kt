@@ -1,21 +1,21 @@
 package de.bornholdtlee.topsnackbar
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.res.ColorStateList
 import android.graphics.Paint.UNDERLINE_TEXT_FLAG
 import android.os.Build
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.WindowInsets
+import android.view.*
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import kotlin.time.Duration
 
 class TopSnackbar {
 
@@ -26,9 +26,9 @@ class TopSnackbar {
     }
 
     data class Options(
-        val actionMessage: Int? = null,
-        val duration: Int? = 2000,
-        val onActionTap: (() -> Unit)? = null,
+        val onActionClicked: (() -> Unit)? = null,
+        val actionMessage: String? = null,
+        val duration: Duration? = null,
         val applyStatusBarTopMarginToMessage: Boolean = false
     )
 
@@ -70,127 +70,88 @@ class TopSnackbar {
             type: Type,
             options: Options = Options()
         ) {
+
+            val snackbar: Snackbar = createSnackBar(
+                view = view,
+                message = message,
+                options = options
+            )
+
             when (type) {
-                Type.Negative -> showNegativeMessage(view, message)
-                Type.Neutral -> showNeutralMessage(view, message)
-                Type.Positive -> showPositiveMessage(view, message)
+                Type.Negative -> showNegativeMessage(snackbar)
+                Type.Neutral -> showNeutralMessage(snackbar)
+                Type.Positive -> showPositiveMessage(snackbar)
             }
         }
 
+        fun hideCurrentSnackbar() {
+            currentSnackbar?.dismiss()
+            currentSnackbar = null
+        }
+
+        @SuppressLint("WrongConstant")
         private fun createSnackBar(
             view: View,
             message: String,
-            actionMessage: Int?,
-            onActionTap: (() -> Unit)?,
-            applyStatusBarTopMarginToMessage: Boolean = false
+            options: Options
         ): Snackbar {
-            val snackbar: Snackbar = Snackbar.make(view, "", Snackbar.LENGTH_INDEFINITE)
+            val topSnackBar: Snackbar = Snackbar.make(view, "", Snackbar.LENGTH_INDEFINITE)
 
-            val layout: Snackbar.SnackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-            snackbar.view.background = null
-            val params = (snackbar.view.layoutParams as FrameLayout.LayoutParams).apply {
+            if (options.duration != null) topSnackBar.duration = options.duration.inWholeMilliseconds.toInt()
+
+            topSnackBar.view.background = null
+
+            topSnackBar.view.updateLayoutParams<FrameLayout.LayoutParams> {
                 gravity = Gravity.TOP
-                if (applyStatusBarTopMarginToMessage && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)) {
+                if (options.applyStatusBarTopMarginToMessage && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)) {
                     val systemBarTopInset: Int = ViewCompat.getRootWindowInsets(view)
                         ?.getInsets(WindowInsets.Type.systemBars())
                         ?.top
                         ?: 0
                     updateMargins(top = topMargin + systemBarTopInset)
                 }
-            }
-            ViewCompat.setLayoutDirection(snackbar.view, ViewCompat.LAYOUT_DIRECTION_LOCALE)
-            snackbar.view.layoutParams = params
-            layout.addView(LayoutInflater.from(view.context).inflate(R.layout.snackbar, null, false))
-
-            val actionText = snackbar.view.findViewById<TextView>(R.id.snackbar_action_bkk)
-            actionText.isVisible = actionMessage != null
-            actionMessage?.let { actionText.text = view.context.getString(it) }
-            actionText.paintFlags = actionText.paintFlags or UNDERLINE_TEXT_FLAG
-            actionText.setOnClickListener {
-                if (onActionTap != null) onActionTap()
-                hideCurrentSnackbar()
+                ViewCompat.setLayoutDirection(topSnackBar.view, ViewCompat.LAYOUT_DIRECTION_LOCALE)
             }
 
-            snackbar.view.findViewById<TextView>(R.id.snackbar_message).text = message
+            val inflatedView = LayoutInflater.from(view.context).inflate(R.layout.snackbar, topSnackBar.view as ViewGroup, false)
+            (topSnackBar.view as Snackbar.SnackbarLayout).addView(inflatedView)
 
-            return snackbar
+            topSnackBar.view.findViewById<TextView>(R.id.tsbAction).apply {
+                text = options.actionMessage
+                options.actionMessage?.let { message -> text = message }
+                paintFlags = paintFlags or UNDERLINE_TEXT_FLAG
+                setOnClickListener {
+                    options.onActionClicked?.invoke()
+                    hideCurrentSnackbar()
+                }
+                currentSnackbar = topSnackBar
+                isVisible = options.actionMessage?.isNotEmpty() == true
+            }
+
+            topSnackBar.view.findViewById<TextView>(R.id.tsbMessage).text = message
+
+            return topSnackBar
         }
 
-        fun showNeutralMessage(
-            view: View,
-            message: String,
-            actionMessage: Int? = null,
-            duration: Int? = 2000,
-            onActionTap: (() -> Unit)? = null,
-            applyStatusBarTopMarginToMessage: Boolean = false
-        ) {
-            val snackbar: Snackbar = createSnackBar(
-                view = view,
-                message = message,
-                actionMessage = actionMessage,
-                onActionTap = onActionTap,
-                applyStatusBarTopMarginToMessage = applyStatusBarTopMarginToMessage
-            ).apply {
-                this.duration = duration ?: 0
-            }
-
-            val background = snackbar.view.findViewById<View>(R.id.snackbar_background)
-            background.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(view.context, R.color.foreground))
+        private fun showNeutralMessage(snackbar: Snackbar) {
+            val background = snackbar.view.findViewById<View>(R.id.tsbBackground)
+            background.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(snackbar.view.context, R.color.background))
 
             snackbar.show()
         }
 
-        fun showPositiveMessage(
-            view: View,
-            message: String,
-            actionMessage: Int? = null,
-            onActionTap: (() -> Unit)? = null,
-            applyStatusBarTopMarginToMessage: Boolean = false
-        ) {
-            val snackbar: Snackbar = createSnackBar(
-                view = view,
-                message = message,
-                actionMessage = actionMessage,
-                onActionTap = onActionTap,
-                applyStatusBarTopMarginToMessage = applyStatusBarTopMarginToMessage
-            ).apply {
-                duration = 2000
-            }
-            val background = snackbar.view.findViewById<View>(R.id.snackbar_background)
-            background.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(view.context, R.color.actionGreen))
+        private fun showPositiveMessage(snackbar: Snackbar) {
+            val background = snackbar.view.findViewById<View>(R.id.tsbBackground)
+            background.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(snackbar.view.context, R.color.actionGreen))
 
             snackbar.show()
         }
 
-        fun showNegativeMessage(
-            view: View,
-            message: String,
-            actionMessage: Int? = android.R.string.ok,
-            onActionTap: (() -> Unit)? = null,
-            duration: Int? = null,
-            applyStatusBarTopMarginToMessage: Boolean = false
-        ) {
-            val snackbar: Snackbar = createSnackBar(
-                view = view,
-                message = message,
-                actionMessage = actionMessage,
-                onActionTap = onActionTap,
-                applyStatusBarTopMarginToMessage = applyStatusBarTopMarginToMessage
-            ).also { snackbar ->
-                if (actionMessage == null) snackbar.duration = 2000
-                if (duration != null) snackbar.duration = duration
-            }
+        private fun showNegativeMessage(snackbar: Snackbar) {
+            val background: View = snackbar.view.findViewById(R.id.tsbBackground)
+            background.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(snackbar.view.context, R.color.actionRed))
 
-            val background: View = snackbar.view.findViewById(R.id.snackbar_background)
-            background.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(view.context, R.color.actionRed))
-
-            currentSnackbar = snackbar
             snackbar.show()
-        }
-
-        fun hideCurrentSnackbar() {
-            currentSnackbar?.dismiss()
-            currentSnackbar = null
         }
     }
 }
