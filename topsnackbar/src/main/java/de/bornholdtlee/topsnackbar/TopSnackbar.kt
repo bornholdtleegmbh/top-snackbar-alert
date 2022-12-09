@@ -135,21 +135,30 @@ class TopSnackbar {
 
         private fun showNeutralMessage(snackbar: Snackbar) {
             val background = snackbar.view.findViewById<View>(R.id.tsbBackground)
-            background.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(snackbar.view.context, R.color.background))
+            background.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(snackbar.view.context, R.color.tsb_grey))
+
+            val message = snackbar.view.findViewById<TextView>(R.id.tsbMessage)
+            message.setTextColor(ContextCompat.getColor(snackbar.view.context, R.color.tsb_text_neutral))
 
             snackbar.show()
         }
 
         private fun showPositiveMessage(snackbar: Snackbar) {
             val background = snackbar.view.findViewById<View>(R.id.tsbBackground)
-            background.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(snackbar.view.context, R.color.actionGreen))
+            background.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(snackbar.view.context, R.color.tsb_green))
+
+            val message = snackbar.view.findViewById<TextView>(R.id.tsbMessage)
+            message.setTextColor(ContextCompat.getColor(snackbar.view.context, R.color.tsb_text_positive))
 
             snackbar.show()
         }
 
         private fun showNegativeMessage(snackbar: Snackbar) {
             val background: View = snackbar.view.findViewById(R.id.tsbBackground)
-            background.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(snackbar.view.context, R.color.actionRed))
+            background.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(snackbar.view.context, R.color.tsb_red))
+
+            val message = snackbar.view.findViewById<TextView>(R.id.tsbMessage)
+            message.setTextColor(ContextCompat.getColor(snackbar.view.context, R.color.tsb_text_negative))
 
             snackbar.show()
         }

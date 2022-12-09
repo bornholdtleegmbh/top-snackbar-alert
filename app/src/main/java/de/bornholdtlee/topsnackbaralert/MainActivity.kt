@@ -8,6 +8,9 @@ import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.slider.Slider
 import com.google.android.material.textfield.TextInputEditText
 import de.bornholdtlee.topsnackbar.TopSnackbar
+import kotlin.time.Duration
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         val isActionEnabled: Boolean = findViewById<MaterialCheckBox>(R.id.actionClickedCB).isChecked
         val isActionMessageEnabled: Boolean = findViewById<MaterialCheckBox>(R.id.actionMessageCB).isChecked
         val actionMessage: String = findViewById<TextInputEditText>(R.id.actionMessageET).text.toString()
-        val duration: Int = findViewById<Slider>(R.id.durationSlider).value.toInt()
+        val duration: Duration = findViewById<Slider>(R.id.durationSlider).value.toInt().toDuration(DurationUnit.MILLISECONDS)
         val applyStatusBarPadding: Boolean = findViewById<MaterialCheckBox>(R.id.topMarginPaddingCB).isChecked
 
         return TopSnackbar.Options(

@@ -24,15 +24,16 @@
         android:gravity="center"
         android:maxLines="3"
         android:textAlignment="center"
-        android:textColor="@color/textColor"
-        app:autoSizeMaxTextSize="@dimen/text_large"
-        app:autoSizeMinTextSize="@dimen/one_grid_unit"
+        android:textColor="@color/tsb_text_neutral"
+        android:textSize="@dimen/tsb_text_size"
+        app:autoSizeMaxTextSize="@dimen/tsb_text_max_size"
+        app:autoSizeMinTextSize="@dimen/tsb_text_min_size"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tsbAction"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="FEHLER!!1!1  #*@!$?" />
+        tools:text="This is just a demonstration text" />
 
     <TextView
         android:id="@+id/tsbAction"
@@ -42,7 +43,7 @@
         android:layout_marginEnd="@dimen/three_grid_unit"
         android:padding="@dimen/one_grid_unit"
         android:text="@android:string/ok"
-        android:textColor="@color/textColor"
+        android:textColor="@color/tsb_text_neutral"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

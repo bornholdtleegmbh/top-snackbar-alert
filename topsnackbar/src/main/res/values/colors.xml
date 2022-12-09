@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#F2F2F2</color>
+    <color name="tsb_text_neutral">#000000</color>
+    <color name="tsb_text_positive">#000000</color>
+    <color name="tsb_text_negative">#000000</color>
 
-    <color name="textColor">#000000</color>
-
-    <color name="actionRed">#ED4365</color>
-    <color name="actionGreen">#37E48E</color>
+    <color name="tsb_grey">#F2F2F2</color>
+    <color name="tsb_red">#E60230</color>
+    <color name="tsb_green">#05E676</color>
 </resources>
