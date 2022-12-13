@@ -1,4 +1,4 @@
-# top-snackbar-alert
+# Top Snackbar Alert
 
 ![JitPack](https://img.shields.io/jitpack/version/com.github.bornholdtleegmbh/top-snackbar-alert?color=%23cdb83&style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/bornholdtleegmbh/top-snackbar-alert?color=%230087ff&style=for-the-badge)
