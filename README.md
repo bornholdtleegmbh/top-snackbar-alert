@@ -5,8 +5,7 @@
 
 Superpowered snackbar alert for Android which is shown at the top of the screen.
 
-![demonstration gif](top_snackbar_demo.gif)
-<img src="top_snackbar_demo.gif" width="380" height="846"/>
+<img src="top_snackbar_demo.gif" width="266" height="592"/>
 
 ## Usage
 
